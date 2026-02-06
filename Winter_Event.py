@@ -1004,7 +1004,7 @@ def main():
                 
             ainz_pos = Unit_Positions['Ainz']
             click(ainz_pos[0][0],ainz_pos[0][1],delay=0.2)
-            time.slevep(0.5)
+            time.sleep(0.5)
             keyboard.press_and_release('x')
             time.sleep(0.5)
             keyboard.press_and_release('f')
@@ -1019,4 +1019,5 @@ def main():
                 if avM.get_wave() == 0:
                     match_restarted = True
                 time.sleep(1)
+
 main()
