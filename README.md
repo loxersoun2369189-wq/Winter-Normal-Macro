@@ -11,7 +11,7 @@ https://mega.nz/file/C8p1nSpL#c_jFD9UViHjo4eYiVqW8Ep3nUB5L-e7x-f_rWsivvFA
 MAKE SURE TO REPLACE THE OLD FILES IN THAT MEGA FILES WITH THE NEW ONES!!
 
 # Recent updates
-Added CTM flags.  
+Added CTM flags.  Roblox click to move (built in pathing, good for low-end devices / high ping users)
 For `directions('1')` and `directions('2')`, you can add:
 
 ```python
