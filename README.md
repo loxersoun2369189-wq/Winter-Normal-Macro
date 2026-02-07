@@ -9,7 +9,10 @@ An anime vanguards macro for the winter normal LTM mode
 This just contains updated versions of the winter event.  
 For the rest of the files download from:  
 https://mega.nz/file/C8p1nSpL#c_jFD9UViHjo4eYiVqW8Ep3nUB5L-e7x-f_rWsivvFA
-
+### MAKE SURE TO REMOVE THIS IN Tools\avMethods.py
+```
+print(reset_match())
+```
 # Recent updates
 
 ### Fixed stop/start key not stopping
