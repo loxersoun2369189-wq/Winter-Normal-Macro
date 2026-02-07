@@ -13,6 +13,7 @@ import ctypes
 
 # Variables
 STOP_START_HOTKEY = 'l'
+AUTO_START = True # if true upon failure it will auto restart, this also starts the macro when you launch the script
 USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + better)
 USE_WD = True # use world destroyer
 USE_DIO = False # built in dio thing instead
@@ -20,7 +21,6 @@ USE_AINZ_UNIT = "" # name of the unit
 MONARCH_AINZ_PLACEMENT = False # Gets monarch for the unit you place with caloric sone
 MAX_UPG_AINZ_PLACEMENT = False # Will just press z for auto upgrade if true, else it goes untill it finds a certain move (you need your own picture of it)
 AINZ_PLACEMENT_MOVE_PNG = "Winter\\YOUR_MOVE.png" # name the screenshot YOUR_MOVE, it will upgrade the unit untill it finds that image
-
 Unit_Placements_Left = {
     "Ainz": 1,
     'Beni': 3,
@@ -550,6 +550,7 @@ def on_failure():
         click(771,703,delay=0.2)
         print(pyautogui.pixel(771,703))
         time.sleep(0.4)
+    click(771,703,delay=0.2)
     
 
 def sell_kaguya(): # Sells kaguya (cant reset while domain is active)
@@ -571,10 +572,20 @@ def sell_kaguya(): # Sells kaguya (cant reset while domain is active)
             sold = True
         time.sleep(0.4)
         
-
+def detect_loss():
+    print("Starting loss detection")
+    import sys
+    import os
+    while True:
+        if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
+            print("found loss")
+            try:
+                sys.stdout.flush()
+                os.execl(sys.executable, sys.executable, *sys.argv)
+            except Exception as e:
+                print("Error")
     
 def main():
-    first_run = True
     print("Starting Winter Event Macro")
     rabbit_pos = [(956, 543), (692, 524), (953, 512)]
     speed_pos =  [(851, 531), (892, 534), (932, 536)]
@@ -608,9 +619,7 @@ def main():
             quick_rts()
             click(835, 226, delay=0.2) # Start Match
             
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
+             
             place_unit('Bunny', rabbit_pos[0], close=True)
             place_unit('Bunny', rabbit_pos[1], close=True)
             
@@ -629,20 +638,15 @@ def main():
             place_unit('Speed', speed_pos[1], close=True)
             place_unit('Speed', speed_pos[2], close=True)
             for pos in speed_pos:
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
+                 
                 click(pos[0], pos[1], delay=0.2)
                 keyboard.press_and_release('z')
                 time.sleep(0.5)
             click(607, 381, delay=0.2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
+             
             # Wait till max money on all speedwagon
             speed_max = [False, False, False]
             while not all(speed_max):
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 if not g_toggle:
                     break
                 for i, pos in enumerate(speed_pos):
@@ -653,8 +657,8 @@ def main():
                             speed_max[i] = True
                         click(607, 381, delay=0.2)
                 time.sleep(1)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
+             
+               
                 break  
             # Tak's placement + max
             keyboard.press('w')
@@ -662,32 +666,21 @@ def main():
             keyboard.release('w')
             # Press e untill tak is bought
             while not bt.does_exist('Winter\\Tak_hb.png', confidence=0.7, grayscale=False):
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 keyboard.press_and_release('e')
                 time.sleep(0.2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break    
             place_unit("Tak", (853, 604))
             keyboard.press_and_release('z')
             time.sleep(0.5)
             #DIR_NAMICARD
             click(382, 268, delay=0.2, right_click=True) # Goes to nami's card
             while not bt.does_exist('Unit_Maxed.png',confidence=0.8,grayscale=True): # Wait till tak is max
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 time.sleep(0.5)
             click(607, 381, delay=0.2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
-            
+             
+               
             #Nami
             while not bt.does_exist('Winter\\Nami_hb.png', confidence=0.7, grayscale=False, region=(528, 788, 749, 860)): # Buys nami's card
                 keyboard.press_and_release('e')
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 time.sleep(0.2)
             quick_rts()
             place_unit('Nami',(755, 524), region=(528, 788, 749, 860)) # Nami placement
@@ -730,8 +723,6 @@ def main():
             # Wave 19 lane unlocks for 20% boost
             wave_19 = False
             while not wave_19:
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 if avM.get_wave()>=19:
                     #DIR_BUYMAINLANES
                     keyboard.press('d')
@@ -748,9 +739,7 @@ def main():
                 if not g_toggle:
                     break
                 time.sleep(0.5)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
+    
             # Get 2nd and 3rd bunny monarch'd
             quick_rts()
             directions('5')
@@ -767,21 +756,9 @@ def main():
             
             # Get all upgrades
             directions('4')
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
             upgrader('range')
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
             upgrader('speed')
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
             upgrader('armor')
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
             quick_rts()
             directions('3')
             
@@ -795,8 +772,7 @@ def main():
             ainzplaced=False
             while not gamble_done:
                 keyboard.press_and_release('e')
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
+                 
                 if bt.does_exist("Winter\\Full_Bar.png",confidence=0.7,grayscale=True, region=(493, 543, 1024, 785)) or bt.does_exist("Winter\\NO_YEN.png",confidence=0.7,grayscale=True,  region=(493, 543, 1024, 785)):
                     quick_rts()
                     time.sleep(3)
@@ -952,9 +928,9 @@ def main():
                     gamble_done = True
                 time.sleep(0.1)
             print("Gambling done")
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
+             
+               
+
             # Auto upgrade + Monarch everything else
             
             # set up buffer erza
@@ -1008,8 +984,7 @@ def main():
             
             # ice queen
             for ice in Unit_Positions['Rukia']:
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
+                 
                 secure_select((ice[0],ice[1]))
                 time.sleep(0.5)
                 set_boss()
@@ -1032,13 +1007,13 @@ def main():
                     time.sleep(0.5)
                 time.sleep(0.5)
                 click(607, 381, delay=0.2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
+             
+               
+
                 
             for gamer in Unit_Positions['Hero']:
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
+                 
+
                 click(gamer[0],gamer[1],delay=0.2)
                 time.sleep(0.5)
                 keyboard.press_and_release('z')
@@ -1052,8 +1027,8 @@ def main():
                 click(gamer[0],gamer[1],delay=0.2)
                 time.sleep(0.5)
                 click(607, 381, delay=0.2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
+             
+               
                 break
             for kuzan in Unit_Positions['Kuzan']:
                 click(kuzan[0],kuzan[1],delay=0.2)
@@ -1069,10 +1044,9 @@ def main():
                 click(kuzan[0],kuzan[1],delay=0.2)
                 time.sleep(0.5)
                 click(607, 381, delay=0.2)
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
+
+             
+               
             for esc in Unit_Positions['Escanor']:
                 click(esc[0],esc[1],delay=0.2)
                 time.sleep(0.5)
@@ -1091,8 +1065,6 @@ def main():
             wave_150 = False
             done_path = False   
             while not wave_150:
-                if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                    break
                 if avM.get_wave() == 149 and not done_path:       
                     def spam_e():
                         while not done_path:
@@ -1135,9 +1107,6 @@ def main():
                         repair_barricades()
                         quick_rts()
                 time.sleep(2)
-            if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
-                on_failure()
-                break
             num_runs+=1
             print(f"Run over, runs: {num_runs}")
             try:
@@ -1176,5 +1145,12 @@ def main():
                     match_restarted = True
                 time.sleep(1)
 
-
+if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=8):
+    on_failure()
+Thread(target=detect_loss).start()
+if AUTO_START:
+    g_toggle = True
+for z in range(3):
+    print(f"Starting in {3-z}")
+    time.sleep(1)
 main()
