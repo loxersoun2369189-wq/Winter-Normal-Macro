@@ -13,6 +13,7 @@ MAKE SURE TO REPLACE THE OLD FILES IN THAT MEGA FILES WITH THE NEW ONES!!
 
 # Common fixes
 When downloading from mega data corruption can happen which can screw up the python executable or the tesseract. You can either try redownloading / unzipping again OR https://github.com/tesseract-ocr/tesseract/releases/tag/5.5.0 use the teseract installer to install tesseract (clear the folder first) with a clean version in the folder. You can also add the path to the tesseract (to the directory not the exe) in your PATH (enviromental variable).
+For python, you can do a clean install of version 3.13.11 on your device and install these packages: https://pastebin.com/mS2xFd3m
 
 # Recent updates
 Added alot more failure detection to reset if it fails. Added CTM flags.  Roblox click to move (built in pathing, good for low-end devices / high ping users)
