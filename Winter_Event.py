@@ -13,7 +13,7 @@ from threading import Thread
 import ctypes
 
 
-# Variables
+# Variablest
 STOP_START_HOTKEY = 'l'
 AUTO_START = True # if true upon failure it will auto restart, this also starts the macro when you launch the script
 USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + better)
@@ -418,15 +418,24 @@ def place_unit(unit: str, pos : tuple[int,int], close: bool | None=None, region:
     '''
     time_out = 50
     # Click on the unit
+    time_out_2 = 50
+    
     if region is None:
         while not bt.does_exist(f"Winter\\{unit}_hb.png", confidence=0.8, grayscale=False):
+            time_out_2-=1
+            if time_out_2<=0:
+                print("timed out")
+                break
             time.sleep(0.3)
         bt.click_image(f'Winter\\{unit}_hb.png', confidence=0.8,grayscale=False,offset=(0,0))
     else:
         while not bt.does_exist(f"Winter\\{unit}_hb.png", confidence=0.8, grayscale=False,region=region):
+            time_out_2-=1
+            if time_out_2<=0:
+                print("timed out")
+                break
             time.sleep(0.3)
         bt.click_image(f'Winter\\{unit}_hb.png', confidence=0.8,grayscale=False,offset=(0,0),region=region)
-        
     time.sleep(0.2)
     click(pos[0], pos[1], delay=0.67)
     time.sleep(0.5)
@@ -1036,7 +1045,7 @@ def main():
                 click(607, 381, delay=0.2)
              
                
-             
+
             for kuzan in Unit_Positions['Kuzan']:
                 click(kuzan[0],kuzan[1],delay=0.2)
                 time.sleep(0.5)
@@ -1193,6 +1202,4 @@ for z in range(3):
 if avM.get_wave() == 1:
     avM.restart_match()
 main()
-
-
 
