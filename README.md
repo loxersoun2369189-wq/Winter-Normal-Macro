@@ -12,15 +12,15 @@ https://mega.nz/file/C8p1nSpL#c_jFD9UViHjo4eYiVqW8Ep3nUB5L-e7x-f_rWsivvFA
 
 # Recent updates
 
-###Fixed stop/start key not stopping
+### Fixed stop/start key not stopping
 
-###Full numbis support + auto start
+### Full numbis support + auto start
 ```python
 AUTO_START = True # if true upon failure it will auto restart, this also starts the macro when you launch the script
 USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + better)
 ```
 
-###Added loop-wide lost detection
+### Added loop-wide lost detection
 Restarts program upon lost + resets the mount too.
 
 ```python
