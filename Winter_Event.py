@@ -1166,6 +1166,7 @@ def main():
     
 if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=25):
     on_failure()
+    time.sleep(2)
 Thread(target=detect_loss).start()
 if AUTO_START:
     if not "--stopped" in sys.argv:
@@ -1178,6 +1179,7 @@ for z in range(3):
 if avM.get_wave() >= 1:
     avM.restart_match()
 main()
+
 
 
 
