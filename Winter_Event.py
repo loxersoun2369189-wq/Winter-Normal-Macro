@@ -597,7 +597,7 @@ def sell_kaguya(): # Sells kaguya (cant reset while domain is active)
 def detect_loss():
     print("Starting loss detection")
     while True:
-        if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=25):
+        if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=10) or pyautogui.pixelMatchesColor(690,270,(199, 45, 40),tolerance=5):
             print("found loss")
             try:
                 args = list(sys.argv)
@@ -1167,7 +1167,7 @@ def main():
 
 
     
-if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=25):
+if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=10) or pyautogui.pixelMatchesColor(690,270,(199, 45, 40),tolerance=5):
     on_failure()
     time.sleep(2)
 Thread(target=detect_loss).start()
@@ -1182,6 +1182,7 @@ for z in range(3):
 if avM.get_wave() >= 1:
     avM.restart_match()
 main()
+
 
 
 
