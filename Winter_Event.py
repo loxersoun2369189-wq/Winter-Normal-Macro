@@ -1181,7 +1181,14 @@ for z in range(3):
     time.sleep(1)
 if avM.get_wave() >= 1:
     avM.restart_match()
+#release potential keys
+keyboard.press_and_release('w')
+keyboard.press_and_release('a')
+keyboard.press_and_release('s')
+keyboard.press_and_release('d')
 main()
+
+
 
 
 
