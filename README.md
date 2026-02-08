@@ -25,11 +25,10 @@ USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + b
 ```
 
 ### Added loop-wide lost detection
-Restarts program upon lost + resets the mount too. MAKE SURE TO ADD NEW PICTURE ``ResetMount.png`` IN ``RESOURCES\WINTER!``
+### Removed reset_mount() was useless
 
 ```python
 detect_loss() # detects + restarts 
-reset_mount() # resets the mount state to unmounted
 ```
 
 ---
