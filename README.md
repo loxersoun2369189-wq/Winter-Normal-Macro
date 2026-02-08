@@ -16,19 +16,15 @@ print(reset_match())
 # Recent updates
 
 ### Fixed stop/start key not stopping
+### Added loop-wide lost detection
+### Removed reset_mount() was useless
+### Fixed retry breaking for some people, get new image [here](https://github.com/loxerex/Winter-Normal-Macro/blob/main/Resources/Winter/DetectLoss.png)
 
 ### Full numbis support + auto start
  - Get the new image needed for this [here](https://github.com/loxersoun2369189-wq/Winter-Normal-Macro/blob/main/Resources/Winter/ResetMount.png)
 ```python
 AUTO_START = True # if true upon failure it will auto restart, this also starts the macro when you launch the script
 USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + better)
-```
-
-### Added loop-wide lost detection
-### Removed reset_mount() was useless
-### Fixed retry breaking for some people, get new image [here](https://github.com/loxerex/Winter-Normal-Macro/blob/main/Resources/Winter/DetectLoss.png)
-
-```python
 detect_loss() # detects + restarts 
 ```
 
