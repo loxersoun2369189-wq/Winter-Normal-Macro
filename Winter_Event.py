@@ -205,7 +205,7 @@ def directions(area: str, unit: str | None=None, CTM: bool | None = None): # Thi
             keyboard.release('a')
 
             keyboard.press('s')
-            time.sleep(1.85)
+            time.sleep(1.7)
             keyboard.release('s')
             keyboard.press_and_release('v')
             time.sleep(2)
@@ -1182,6 +1182,7 @@ for z in range(3):
 if avM.get_wave() >= 1:
     avM.restart_match()
 main()
+
 
 
 
