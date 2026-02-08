@@ -443,7 +443,7 @@ def upgrader(upgrade: str):
                     break
                 click(pos[0], pos[1], delay=0.2)
                 time.sleep(0.8)
-            ctypes.windll.useer32.mouse_event(0x0800, 0, 0, 1000, 0)
+            ctypes.windll.user32.mouse_event(0x0800, 0, 0, 1000, 0)
             click(1112, 309, delay=0.2)
         if upgrade == "armor":
             click(765, 497, delay=0.1)
@@ -1402,3 +1402,4 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
