@@ -26,6 +26,7 @@ USE_NIMBUS = True # Use the nimbus cloud instead of newsman (more consistent + b
 
 ### Added loop-wide lost detection
 ### Removed reset_mount() was useless
+### Fixed retry breaking for some people, get new image [here](https://github.com/loxerex/Winter-Normal-Macro/blob/main/Resources/Winter/DetectLoss.png)
 
 ```python
 detect_loss() # detects + restarts 
