@@ -1410,9 +1410,11 @@ def disconnect_checker():
 def on_disconnect():
     while not bt.does_exist("Winter\\AreaIcon.png",confidence=0.8,grayscale=False):
         click(849,596,delay=0.1)
-        time.sleep(4)
+        time.sleep(2)
+        click(752, 548,delay=0.2)
+        time.sleep(2)
         click(1083,321,delay=0.1)
-        time.sleep(4)
+        time.sleep(2)
     time.sleep(1)
     bt.click_image("Winter\\AreaIcon.png",confidence=0.8,grayscale=False,offset=(0,0))
     time.sleep(3)
@@ -1496,3 +1498,4 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
