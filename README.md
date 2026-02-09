@@ -9,7 +9,7 @@ An anime vanguards macro for the winter normal LTM mode
 # What is this?
 This just contains updated versions of the winter_event.py and the images.  
 For the rest of the files download from:  
-- https://mega.nz/file/CphzFRiR#s5_-7hDLLsRpXCn5DjvZ6p9ZT-V0tVR8_sHXh21uiZM
+- [here](https://u.pcloud.link/publink/show?code=XZpt0l5ZkLubXliXPp0FbVB2nK7l4JbJzTRk)
 ### MAKE SURE TO REMOVE THIS IN Tools\avMethods.py
 ```
 print(reset_match())
