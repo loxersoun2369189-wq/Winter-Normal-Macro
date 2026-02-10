@@ -743,13 +743,13 @@ def set_boss(): # Sets unit priority to boss
 def on_failure():
     print("ran")
     global REPLAY_BUTTON_POS
-    #click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
+    click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
     time.sleep(1)
     while bt.does_exist("Winter\\DetectLoss.png",confidence=0.7,grayscale=True,region=(311, 295, 825, 428)):
-        #click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
+        click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
         print("Retrying...")
         time.sleep(0.4)
-    #click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
+    click(REPLAY_BUTTON_POS[0],REPLAY_BUTTON_POS[1],delay=0.2)
     
 
 def sell_kaguya(): # Sells kaguya (cant reset while domain is active)
@@ -1516,4 +1516,5 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
