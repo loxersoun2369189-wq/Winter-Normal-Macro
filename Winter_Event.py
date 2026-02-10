@@ -1452,6 +1452,12 @@ def on_disconnect():
         if pyautogui.pixelMatchesColor(884,266,(170,232,235),tolerance=8):
             open_menu = True
         if not open_menu:
+            click(849,596,delay=0.1)
+            time.sleep(2)
+            click(752, 548,delay=0.2)
+            time.sleep(2)
+            click(1083,321,delay=0.1)
+            time.sleep(2)
             bt.click_image("Winter\\AreaIcon.png",confidence=0.8,grayscale=False,offset=(0,0))
         time.sleep(3)
     # [(454, 703), (659, 509), (301, 676)]
@@ -1510,3 +1516,4 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
