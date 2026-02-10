@@ -1,21 +1,8 @@
 ---
 
-## Recent Update — 1.2
-
-### Before You Update
-Save any values you changed into a notepad so you can paste them back after updating.  
-A lot of this will move into a `.json` file next patch so you won’t have to do this anymore.
-
-### Beta Features
-- **Disconnect checker + auto‑reconnector**  
-  Just clicks the Roblox *Reconnect* button. Not messing with launch args for now.
-
-### Changes
-- Added a **sanity check** in `secure_placement` in case lag and erza's pop up bricks the macro  
-- Improved **final lane buyer** so it still buys lanes even if your camera breaks  
-- Increased **purchase detect tolerance** from 20 → 40  
-- Made `pydirectinput` press **backslash** instead of using `keyboard` (may fix the random “/” issue)
-
+## Recent Update — 1.3
+Check discord for changelog:
+https://discord.gg/rbWmQdKZka
 ---
 
 # Winter-Normal-Macro
