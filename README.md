@@ -14,7 +14,7 @@ For the rest of the files download from:
 - https://u.pcloud.link/publink/show?code=XZunpl5ZrG0vX3NNTsfCwzmkzPR81F9eAJIy
 
 # Update Guide
-https://youtu.be/E6ZZEhlJBC0
+https://www.youtube.com/watch?v=CVOwMsYfJZM
 
 ---
 
