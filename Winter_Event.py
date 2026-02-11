@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.499'
+VERSION_N = '1.4999'
 
 class Cur_Settings: pass
 
@@ -1536,6 +1536,7 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
 
 
