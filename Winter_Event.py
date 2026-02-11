@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.42'
+VERSION_N = '1.45'
 
 class Cur_Settings: pass
 
@@ -78,8 +78,12 @@ def toggle():
         sys.stdout.flush()
         subprocess.Popen([sys.executable, *args, "--stopped"])
         os._exit(0)
+        
+def kill():
+    os._exit(0)
+    
 keyboard.add_hotkey(Settings.STOP_START_HOTKEY, toggle) 
-
+keyboard.add_hotkey("k",kill)
 # Actions
 def click(x,y, delay: int | None=None, right_click: bool | None = None) -> None:
     if delay is not None:
@@ -641,11 +645,15 @@ def set_boss(): # Sets unit priority to boss
     
 def on_failure():
     print("ran")
+    time_out = 60/0.4
     click(Settings.REPLAY_BUTTON_POS[0],Settings.REPLAY_BUTTON_POS[1],delay=0.2)
     time.sleep(1)
     while bt.does_exist("Winter\\DetectLoss.png",confidence=0.7,grayscale=True,region=(311, 295, 825, 428)):
+        if time_out<0:
+            on_disconnect()
         click(Settings.REPLAY_BUTTON_POS[0],Settings.REPLAY_BUTTON_POS[1],delay=0.2)
         print("Retrying...")
+        time_out-=1
         time.sleep(0.4)
     click(Settings.REPLAY_BUTTON_POS[0],Settings.REPLAY_BUTTON_POS[1],delay=0.2)
     
@@ -1478,6 +1486,7 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
 
 
