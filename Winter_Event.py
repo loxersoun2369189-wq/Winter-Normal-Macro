@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.41'
+VERSION_N = '1.42'
 
 class Cur_Settings: pass
 
@@ -468,7 +468,7 @@ def place_unit(unit: str, pos : tuple[int,int], close: bool | None=None, region:
     '''
     Places a unit found in Winter\\UNIT_hb.png, at location given in pos. 
     '''
-    time_out = 50
+    time_out = 20
     time_out_2 = 50
     # Click on the unit
     if region is None:
@@ -573,6 +573,7 @@ def place_hotbar_units():
                     time.sleep(2)
                     set_boss()
                     keyboard.press_and_release('z')
+                    click(607, 381, delay=0.2)
                     directions('5')
                     buy_monarch()
                     quick_rts()
@@ -1477,5 +1478,6 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
 
