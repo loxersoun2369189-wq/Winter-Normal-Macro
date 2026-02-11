@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.49'
+VERSION_N = '1.495'
 
 class Cur_Settings: pass
 
@@ -24,6 +24,8 @@ global Settings
 Settings = Cur_Settings()
 
 PRIVATE_SERVER_CODE = "" # Not in settings so u dont accidently share ur ps lol
+
+TAK_FINDER = True # turn off if it runs into a wall while trying to find tak
 
 ROUND_RESTART = 0 # 0 will make it so this doesnt happen, change it to what round u want it to restart
 
@@ -785,6 +787,7 @@ def main():
              
             # Tak's placement + max
             
+        
             if bt.does_exist("Winter\\Tak_Detect.png",confidence=0.8,grayscale=True):
                 bt.click_image("Winter\\Tak_Detect.png",confidence=0.8,grayscale=True,offset=(0,-20))   
                 click(50,50,delay=0.1,right_click=True,dont_move=True)
@@ -792,16 +795,17 @@ def main():
                 keyboard.press('w')
                 time.sleep(Settings.TAK_W_DELAY)
                 keyboard.release('w')
-            path_tak = False
-            while not path_tak:
-                keyboard.press('w')
-                time.sleep(0.1)
-                keyboard.release('w')
-                keyboard.press_and_release('e')
-                time.sleep(0.4)
-                if bt.does_exist('Winter\\TakDetect.png', confidence=0.7, grayscale=True,region=(581, 676, 958, 752)) or  bt.does_exist('Winter\\Tak_hb.png', confidence=0.7, grayscale=False):
-                    path_tak = True
-                time.sleep(0.5)
+            if TAK_FINDER:
+                path_tak = False
+                while not path_tak:
+                    keyboard.press('w')
+                    time.sleep(0.1)
+                    keyboard.release('w')
+                    keyboard.press_and_release('e')
+                    time.sleep(0.4)
+                    if bt.does_exist('Winter\\TakDetect.png', confidence=0.7, grayscale=True,region=(581, 676, 958, 752)) or  bt.does_exist('Winter\\Tak_hb.png', confidence=0.7, grayscale=False):
+                        path_tak = True
+                    time.sleep(0.5)
             # Press e untill tak is bought
             while not bt.does_exist('Winter\\Tak_hb.png', confidence=0.7, grayscale=False):
                 keyboard.press_and_release('e')
