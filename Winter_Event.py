@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.495'
+VERSION_N = '1.499'
 
 class Cur_Settings: pass
 
@@ -511,6 +511,8 @@ def place_unit(unit: str, pos : tuple[int,int], close: bool | None=None, region:
         time.sleep(0.5)
         click(pos[0], pos[1], delay=0.1)
         time.sleep(1)
+        if bt.does_exist("Winter\\UnitExists.png",confidence=0.9,grayscale=True):
+            break
         if pyautogui.pixel(607, 381) == (255,255,255):
             break
         if True: # if u want it to re-click
@@ -1525,5 +1527,6 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
 
