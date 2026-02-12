@@ -16,7 +16,7 @@ import subprocess
 import json
 import pygetwindow as gw
 
-VERSION_N = '1.49999'
+VERSION_N = '1.499999'
 
 class Cur_Settings: pass
 
@@ -26,6 +26,7 @@ Settings = Cur_Settings()
 USE_KAGUYA = False
 
 USE_BUU = False # Thanks to Doomgus for getting images for this strat to work :steamhappy:
+USE_FREIZA = True
 
 PRIVATE_SERVER_CODE = "" # Not in settings so u dont accidently share ur ps lol
 
@@ -1036,6 +1037,8 @@ def main():
                             ainz_setup(unit="god")
                         elif USE_BUU:
                             ainz_setup(unit="boo")
+                        elif USE_FREIZA:
+                            ainz_setup(unit="Lord Fr")
                         else:
                             ainz_setup(unit=Settings.USE_AINZ_UNIT)
                         global AINZ_SPELLS
@@ -1062,6 +1065,25 @@ def main():
                             quick_rts()
                             time.sleep(1)
                             click(pos[0], pos[1], delay=0.67) 
+                        if USE_FREIZA:
+                            freiza_aliens = 0
+                            alien_pos = [(825, 692), (883, 693), (931, 692)]
+                            while freiza_aliens < 3:
+                                secure_select(Settings.Unit_Positions.get("Caloric_Unit"))
+                                while not bt.does_exist("Winter\\FreizaAbility.png",confidence=0.7,grayscale=True):
+                                    time.sleep(0.5)
+                                bt.click_image("Winter\\FreizaAbility.png",confidence=0.7,grayscale=True,offset=(0,0))
+                                time.sleep(2)
+                                click(466, 681,0.2)
+                                time.sleep(0.5)
+                                pos = alien_pos[p]
+                                while not pyautogui.pixel(607, 381) == (255,255,255):
+                                    click(pos[0], pos[1], delay=0.67)
+                                    time.sleep(1)
+                                time.sleep(1)
+                                keyboard.press_and_release('z')
+                                freiza_aliens+=1
+                            click(607, 381, delay=0.2)
                         time.sleep(1)
                         print("Placed ainz's unit")
                         click(607, 381, delay=0.2)
@@ -1504,8 +1526,10 @@ def on_disconnect():
 
 if "--restart" in sys.argv:
     on_disconnect()
-    
 
+
+       
+    
 Thread(target=disconnect_checker).start()
 print(f"Launched with args {sys.argv}")
 print(f"Running loxer's winter macro v{VERSION_N}")
@@ -1558,7 +1582,3 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
-
-
-
-
