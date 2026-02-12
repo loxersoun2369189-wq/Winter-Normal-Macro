@@ -1076,9 +1076,9 @@ def main():
                                 time.sleep(2)
                                 click(466, 681,0.2)
                                 time.sleep(0.5)
-                                pos = alien_pos[p]
+                                alien = alien_pos[freiza_aliens]
                                 while not pyautogui.pixel(607, 381) == (255,255,255):
-                                    click(pos[0], pos[1], delay=0.67)
+                                    click(alien[0], alien[1], delay=0.67)
                                     time.sleep(1)
                                 time.sleep(1)
                                 keyboard.press_and_release('z')
@@ -1582,3 +1582,4 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
