@@ -27,13 +27,6 @@ def save_info(data):
     with open(Info_Path, 'w') as f:
         json.dump(data, f, indent=4)     
 start = datetime.now()
-base_data = {
-    "num_runs": 0,
-    "wins": 0,
-    "losses": 0,
-    "runtime": ""
-}
-save_info(base_data)
 
 VERSION_N = '1.5'
 
@@ -1582,6 +1575,7 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
+
 
 
 
