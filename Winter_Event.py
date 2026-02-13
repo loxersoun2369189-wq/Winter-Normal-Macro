@@ -2,12 +2,12 @@
 from Tools import botTools as bt
 from Tools import winTools as wt
 from Tools import avMethods as avM
-import webhook
 import keyboard
 import time
 import pyautogui
 import sys
 import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
 from datetime import datetime
 from threading import Thread
 import pydirectinput
@@ -15,8 +15,27 @@ import ctypes
 import subprocess
 import json
 import pygetwindow as gw
+Info_Path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Info.json")
 
-VERSION_N = '1.5alpha3'
+def load_info():
+    Info = None
+    if os.path.isfile(Info_Path):
+        with open(Info_Path, 'r') as f:
+            Info = json.load(f)
+    return Info
+def save_info(data):
+    with open(Info_Path, 'w') as f:
+        json.dump(data, f, indent=4)     
+start = datetime.now()
+base_data = {
+    "num_runs": 0,
+    "wins": 0,
+    "losses": 0,
+    "runtime": ""
+}
+save_info(base_data)
+
+VERSION_N = '1.5'
 
 class Cur_Settings: pass
 
@@ -33,7 +52,7 @@ TAK_FINDER = True # turn off if it runs into a wall while trying to find tak
 
 ROUND_RESTART = 0 # 0 will make it so this doesnt happen, change it to what round u want it to restart
 
-Settings_Path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"Settings")
+Settings_Path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"Settings")
 WE_Json = os.path.join(Settings_Path,"Winter_Event.json")
 
 AINZ_SPELLS = False
@@ -698,6 +717,12 @@ def detect_loss():
         if pyautogui.pixelMatchesColor(690,270,(242,25,28),tolerance=10) or pyautogui.pixelMatchesColor(690,270,(199, 45, 40),tolerance=5):
             print("found loss")
             try:
+                lose_data = load_info()
+                lose_data['num_runs']+=1
+                lose_data['losses']+=1
+                lose_data['runtime'] = f"{str((datetime.now()-start)).split('.')[0]}"
+                save_info(lose_data)
+                
                 args = list(sys.argv)
                 if "--stopped" in args:
                     args.remove("--stopped")
@@ -1084,7 +1109,7 @@ def main():
                                 if bt.does_exist("Winter\\Buu_Ability.png",confidence=0.5,grayscale=False):
                                     print("Found Ability")
                                     bt.click_image("Winter\\Buu_Ability.png",confidence=0.5,grayscale=False,offset=(0,0))
-                                    time.sleep(1)
+                                    time.sleep(15)
                                     click(441,151,0.2)
                                     time.sleep(1)
                                     secure_select(Settings.Unit_Positions.get("Caloric_Unit"))
@@ -1092,6 +1117,7 @@ def main():
                                 if bt.does_exist("Winter\\BuuSellDetect.png",confidence=0.8,grayscale=False):
                                     print("SellBuu")
                                     keyboard.press_and_release('x')
+                                    time.sleep(15)
                                     break
                                 if not bt.does_exist("Unit_Maxed.png",confidence=0.8,grayscale=False):
                                     print("Upgrade")
@@ -1344,19 +1370,11 @@ def main():
             num_runs+=1
             print(f"Run over, runs: {num_runs}")
             try:
-                    victory = wt.screen_shot_memory()
-                    runtime = f"{datetime.now()-start_of_run}"
-                
-                    g = Thread(target=webhook.send_webhook,
-                        kwargs={
-
-                                "run_time": f"{str(runtime).split('.')[0]}",
-                                "num_runs": num_runs,
-                                "task_name": "Winter Event",
-                                "img": victory,
-                            },
-                        )            
-                    g.start()
+                win_data = load_info()
+                win_data['num_runs']+=1
+                win_data['wins']+=1
+                win_data['runtime'] = f"{str((datetime.now()-start)).split('.')[0]}"
+                save_info(win_data)
             except Exception as e:
                 print(f" error {e}")
                 
@@ -1369,15 +1387,16 @@ def main():
                 keyboard.press_and_release('f')
                 time.sleep(1)
                 sell_kaguya()
-                keyboard.press_and_release('f')
-                
-            match_restarted = False
-            while not match_restarted:
-                avM.restart_match() 
-                time.sleep(0.5)
-                if avM.get_wave() == 0:
-                    match_restarted = True
-                time.sleep(5)
+                keyboard.press_and_release('f')      
+                match_restarted = False
+                while not match_restarted:
+                    avM.restart_match() 
+                    time.sleep(0.5)
+                    if avM.get_wave() == 0:
+                        match_restarted = True
+            else:
+                avM.restart_match()    
+            time.sleep(2)
 
 def disconnect_checker():
     time.sleep(60) # intial detect delay
@@ -1563,8 +1582,6 @@ else:
     keyboard.press_and_release('s')
     keyboard.press_and_release('d')
     main()
-
-
 
 
 
